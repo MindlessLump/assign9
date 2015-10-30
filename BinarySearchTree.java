@@ -4,6 +4,12 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.NoSuchElementException;
 
+/**
+ * Class representation of a Binary Search Tree with a root node.
+ * 
+ * @author Erik Martin and Nick Porter
+ */
+
 public class BinarySearchTree<Type extends Comparable<? super Type>> implements SortedSet<Type> {
 	
 	private BinaryNode<Type> root;
