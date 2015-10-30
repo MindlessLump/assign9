@@ -1,0 +1,5 @@
+1.  Add N items to a BST in sorted order, then record the time required to invoke the contains method for each item in the BST.
+
+2.  Add the same N items to a new BST in a random order, then record the time required to invoke the contains method for each item in the new BST. (Due to the randomness of this step, you may want to perform it several times and record the average running time required.)
+
+3.  Let one line of the plot be the running times found in #1 for each N in the range [1000, 10000] stepping by 100. (Feel free to change the range, as needed, to complement your machine.)  Let the other line of the plot be the running times found in #2 for each N in the same range.

@@ -1,0 +1,13 @@
+1.  Add N items to a TreeSet in a random order and record the time required to do this. 
+
+2.  Record the time required to invoke the contains method for each item in the TreeSet.
+
+3.  Add the same N items (in the same random order) as in #1 to a BinarySearchTree and record the time required to do this. 
+
+4.  Record the time required to invoke the contains method for each item in the BinarySearchTree.
+
+5.  Let one line of the plot be the running times found in #1 for each N in the range [1000, 10000] stepping by 100. (Feel free to change the range, as needed, to complement your machine.) Let the other line of the plot be the running times found in the #3 for each N in the same range as above.
+
+6.  Let one line of a new plot be the running times found in #2 for each N in the same range as above. Let the other line of plot be the running times found in #4 for each N in the same range.
+
+(You can combine the plots in 5 and 6, if the y axes are similar.)
