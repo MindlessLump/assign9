@@ -5,6 +5,9 @@ import java.util.Collection;
 import java.util.NoSuchElementException;
 
 public class BinarySearchTree<Type extends Comparable<? super Type>> implements SortedSet<Type> {
+	
+	private BinaryNode<Type> root;
+	private int size;
 
 	@Override
 	/**
@@ -18,8 +21,9 @@ public class BinarySearchTree<Type extends Comparable<? super Type>> implements 
 	 *           if the item is null
 	 */
 	public boolean add(Type item) {
-		// TODO Auto-generated method stub
-		return false;
+		if(item == null)
+			throw new NullPointerException("Item is null.");
+		return root.add(item);
 	}
 
 	@Override
@@ -35,8 +39,11 @@ public class BinarySearchTree<Type extends Comparable<? super Type>> implements 
 	 *           if any of the items is null
 	 */
 	public boolean addAll(Collection<? extends Type> items) {
-		// TODO Auto-generated method stub
-		return false;
+		for(Type t : items) {
+			if(!add(t))
+				return false;
+		}
+		return true;
 	}
 
 	@Override
@@ -45,8 +52,8 @@ public class BinarySearchTree<Type extends Comparable<? super Type>> implements 
 	 * call.
 	 */
 	public void clear() {
-		// TODO Auto-generated method stub
-		
+		root = null;
+		size = 0;
 	}
 
 	@Override
@@ -62,8 +69,9 @@ public class BinarySearchTree<Type extends Comparable<? super Type>> implements 
 	 *           if the item is null
 	 */
 	public boolean contains(Type item) {
-		// TODO Auto-generated method stub
-		return false;
+		if(item == null)
+			throw new NullPointerException("Item is null.");
+		return root.contains(item);
 	}
 
 	@Override
@@ -79,8 +87,11 @@ public class BinarySearchTree<Type extends Comparable<? super Type>> implements 
 	 *           if any of the items is null
 	 */
 	public boolean containsAll(Collection<? extends Type> items) {
-		// TODO Auto-generated method stub
-		return false;
+		for(Type t : items) {
+			if(!contains(t))
+				return false;
+		}
+		return true;
 	}
 
 	@Override
@@ -91,8 +102,10 @@ public class BinarySearchTree<Type extends Comparable<? super Type>> implements 
 	 *           if the set is empty
 	 */
 	public Type first() throws NoSuchElementException {
-		// TODO Auto-generated method stub
-		return null;
+		if(isEmpty()) {
+			throw new NoSuchElementException("Set is empty.");
+		}
+		return root.getLeftmostNode().getData();
 	}
 
 	@Override
@@ -100,8 +113,7 @@ public class BinarySearchTree<Type extends Comparable<? super Type>> implements 
 	 * Returns true if this set contains no items.
 	 */
 	public boolean isEmpty() {
-		// TODO Auto-generated method stub
-		return false;
+		return root == null;
 	}
 
 	@Override
@@ -112,8 +124,10 @@ public class BinarySearchTree<Type extends Comparable<? super Type>> implements 
 	 *           if the set is empty
 	 */
 	public Type last() throws NoSuchElementException {
-		// TODO Auto-generated method stub
-		return null;
+		if(isEmpty()) {
+			throw new NoSuchElementException("Set is empty.");
+		}
+		return root.getRightmostNode().getData();
 	}
 
 	@Override
@@ -155,8 +169,7 @@ public class BinarySearchTree<Type extends Comparable<? super Type>> implements 
 	 * Returns the number of items in this set.
 	 */
 	public int size() {
-		// TODO Auto-generated method stub
-		return 0;
+		return size;
 	}
 
 	@Override
@@ -165,7 +178,6 @@ public class BinarySearchTree<Type extends Comparable<? super Type>> implements 
 	 * order.
 	 */
 	public ArrayList<Type> toArrayList() {
-		// TODO Auto-generated method stub
-		return null;
+		return root.toArrayList(new ArrayList<Type>());
 	}
 }

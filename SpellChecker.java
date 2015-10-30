@@ -10,7 +10,7 @@ import java.util.Scanner;
  * Represents a "dictionary" of strings using a binary search tree and offers
  * methods for spell-checking documents.
  * 
- * @author Erin Parker and ??
+ * @author Erin Parker, Erik Martin, and Nick Porter
  */
 public class SpellChecker {
 
@@ -52,7 +52,7 @@ public class SpellChecker {
    *          - the String to be added to the dictionary
    */
   public void addToDictionary(String word) {
-    // TODO FILL IN
+    dictionary.add(word);
   }
 
   /**
@@ -62,7 +62,7 @@ public class SpellChecker {
    *          - the String to be removed from the dictionary
    */
   public void removeFromDictionary(String word) {
-    // TODO FILL IN
+    dictionary.remove(word);
   }
 
   /**
@@ -75,10 +75,14 @@ public class SpellChecker {
   public List<String> spellCheck(File documentFile) {
 
     List<String> wordsToCheck = readFromFile(documentFile);
+    List<String> misspelledWords = new ArrayList<String>();
 
-    // TODO FILL IN -- do not return null
+    for(String word : wordsToCheck) {
+    	if(!dictionary.contains(word))
+    		misspelledWords.add(word);
+    }
 
-    return null;
+    return misspelledWords;
   }
 
   /**
@@ -88,7 +92,7 @@ public class SpellChecker {
    *          - the List of Strings to be added to the dictionary
    */
   private void buildDictionary(List<String> words) {
-    // TODO FILL IN
+    dictionary.addAll(words);
   }
 
   /**
@@ -127,6 +131,7 @@ public class SpellChecker {
           words.add(s.toLowerCase());
         }
       }
+      fileInput.close();
 
     } catch (FileNotFoundException e) {
       System.err.println("File " + file + " cannot be found.");
