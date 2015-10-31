@@ -168,6 +168,26 @@ public class BinarySearchTree<Type extends Comparable<? super Type>> implements 
 
 		//Get BinaryNode objects to represent the necessary nodes
 		BinaryNode<Type> toBeRemoved = get(item);
+		
+		if (toBeRemoved == root) {
+			//Does not have a parent, boolean expression was throwing NullPointer.
+			if (root.isLeaf()) {
+				clear();
+				return true;
+			}
+			
+			if (root.getRightChild() != null) {
+				root = root.successor();
+			}
+			
+			if (root.getLeftChild() != null) {
+				root = root.getLeftChild();
+			}
+			//Can't think of a case where removing the root would fail.
+			size--;
+			return true;
+		}
+		
 		BinaryNode<Type> oldParent = toBeRemoved.getParent();
 		boolean isLeftChild = toBeRemoved.getData().compareTo(oldParent.getData()) < 0;
 		

@@ -141,5 +141,16 @@ public class BinaryTreeTester {
 		tree.remove(22);
 		assertEquals(2, tree.size());
 	}
+	
+	@Test
+	public void testSize6() {
+		tree = new BinarySearchTree<Integer>();
+		tree.add(1);
+		tree.add(22);
+		tree.add(11);
+		//Removing root
+		tree.remove(1);
+		assertEquals(2, tree.size());
+	}
 
 }
