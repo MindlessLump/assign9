@@ -14,6 +14,11 @@ public class BinarySearchTree<Type extends Comparable<? super Type>> implements 
 	
 	private BinaryNode<Type> root;
 	private int size;
+	
+	public BinarySearchTree() {
+		size = 0;
+		root = new BinaryNode<Type>(null);
+	}
 
 	@Override
 	/**
@@ -29,6 +34,12 @@ public class BinarySearchTree<Type extends Comparable<? super Type>> implements 
 	public boolean add(Type item) {
 		if(item == null)
 			throw new NullPointerException("Item is null.");
+		if(size == 0) {
+			root = new BinaryNode<Type>(item);
+			size++;
+			return true;
+		}
+		size++;
 		return root.add(item);
 	}
 
@@ -161,9 +172,11 @@ public class BinarySearchTree<Type extends Comparable<? super Type>> implements 
 			toBeRemoved.setParent(null);
 			if(isLeftChild) {
 				oldParent.setLeftChild(null);
+				size--;
 				return true;
 			}
 			oldParent.setRightChild(null);
+			size--;
 			return true;
 		}
 		
@@ -172,9 +185,11 @@ public class BinarySearchTree<Type extends Comparable<? super Type>> implements 
 			toBeRemoved.setParent(null);
 			if(isLeftChild) {
 				oldParent.setLeftChild(toBeRemoved.getRightChild());
+				size--;
 				return true;
 			}
 			oldParent.setRightChild(toBeRemoved.getRightChild());
+			size--;
 			return true;
 		}
 		
@@ -183,9 +198,11 @@ public class BinarySearchTree<Type extends Comparable<? super Type>> implements 
 			toBeRemoved.setParent(null);
 			if(isLeftChild) {
 				oldParent.setLeftChild(toBeRemoved.getLeftChild());
+				size--;
 				return true;
 			}
 			oldParent.setRightChild(toBeRemoved.getLeftChild());
+			size--;
 			return true;
 		}
 		
@@ -213,6 +230,7 @@ public class BinarySearchTree<Type extends Comparable<? super Type>> implements 
 			toBeRemoved.getLeftChild().setParent(successor);
 			successor.setRightChild(toBeRemoved.getRightChild());
 			toBeRemoved.getRightChild().setParent(successor);
+			size--;
 			return true;
 		}
 		return false;
