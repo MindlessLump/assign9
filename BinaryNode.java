@@ -134,6 +134,30 @@ public class BinaryNode<Type extends Comparable<? super Type>> {
 	}
 	
 	/**
+	 * @param item The data of the node to be returned
+	 * @return the BinaryNode encapsulating the data
+	 */
+	public BinaryNode<Type> get(Type item) {
+		if(this.getData().compareTo(item) == 0) {
+			return this;
+		}
+		if(this.getData().compareTo(item) < 0 && leftChild != null) {
+			return leftChild.get(item);
+		}
+		if(this.getData().compareTo(item) > 0 && rightChild != null) {
+			return rightChild.get(item);
+		}
+		return null;
+	}
+	
+	/**
+	 * @return The successor of this
+	 */
+	public BinaryNode<Type> successor() {
+		return rightChild.getLeftmostNode();
+	}
+	
+	/**
 	 * @return The left child of this
 	 */
 	public BinaryNode<Type> getLeftChild() {

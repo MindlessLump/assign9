@@ -148,7 +148,73 @@ public class BinarySearchTree<Type extends Comparable<? super Type>> implements 
 	 *           if the item is null
 	 */
 	public boolean remove(Type item) {
-		// TODO Auto-generated method stub
+		if(item == null)
+			throw new NullPointerException("Item is null.");
+		
+		//Get BinaryNode objects to represent the necessary nodes
+		BinaryNode<Type> toBeRemoved = get(item);
+		BinaryNode<Type> oldParent = toBeRemoved.getParent();
+		boolean isLeftChild = toBeRemoved.getData().compareTo(oldParent.getData()) < 0;
+		
+		//If the node to be removed has no children, simply delete it, and adjust its parent's reference.
+		if(toBeRemoved.getLeftChild() == null && toBeRemoved.getRightChild() == null) {
+			toBeRemoved.setParent(null);
+			if(isLeftChild) {
+				oldParent.setLeftChild(null);
+				return true;
+			}
+			oldParent.setRightChild(null);
+			return true;
+		}
+		
+		//If the node has only a right child, adjust its parent to reference its child directly
+		if(toBeRemoved.getLeftChild() == null && toBeRemoved.getRightChild() != null) {
+			toBeRemoved.setParent(null);
+			if(isLeftChild) {
+				oldParent.setLeftChild(toBeRemoved.getRightChild());
+				return true;
+			}
+			oldParent.setRightChild(toBeRemoved.getRightChild());
+			return true;
+		}
+		
+		//If the node has only a left child, adjust its parent to reference its child directly
+		if(toBeRemoved.getLeftChild() != null && toBeRemoved.getRightChild() == null) {
+			toBeRemoved.setParent(null);
+			if(isLeftChild) {
+				oldParent.setLeftChild(toBeRemoved.getLeftChild());
+				return true;
+			}
+			oldParent.setRightChild(toBeRemoved.getLeftChild());
+			return true;
+		}
+		
+		//If the node has two children, replace the node with its successor, and adjust pointers as necessary
+		if(toBeRemoved.getLeftChild() != null && toBeRemoved.getRightChild() != null) {
+			BinaryNode<Type> successor = toBeRemoved.successor();
+			BinaryNode<Type> successorParent = successor.getParent();
+			toBeRemoved.setParent(null);
+			if(isLeftChild) {
+				oldParent.setLeftChild(successor);
+				successor.setParent(oldParent);
+			}
+			else {
+				oldParent.setRightChild(successor);
+				successor.setParent(oldParent);
+			}
+			if(successor.getRightChild() != null) {
+				successorParent.setLeftChild(successor.getRightChild());
+				successor.getRightChild().setParent(successorParent);
+			}
+			else {
+				successorParent.setLeftChild(null);
+			}
+			successor.setLeftChild(toBeRemoved.getLeftChild());
+			toBeRemoved.getLeftChild().setParent(successor);
+			successor.setRightChild(toBeRemoved.getRightChild());
+			toBeRemoved.getRightChild().setParent(successor);
+			return true;
+		}
 		return false;
 	}
 
@@ -166,8 +232,11 @@ public class BinarySearchTree<Type extends Comparable<? super Type>> implements 
 	 *           if any of the items is null
 	 */
 	public boolean removeAll(Collection<? extends Type> items) {
-		// TODO Auto-generated method stub
-		return false;
+		for(Type t : items) {
+			if(!remove(t))
+				return false;
+		}
+		return true;
 	}
 
 	@Override
@@ -185,5 +254,11 @@ public class BinarySearchTree<Type extends Comparable<? super Type>> implements 
 	 */
 	public ArrayList<Type> toArrayList() {
 		return root.toArrayList(new ArrayList<Type>());
+	}
+	
+	public BinaryNode<Type> get(Type item) {
+		if(item == null)
+			throw new NullPointerException("Item is null.");
+		return root.get(item);
 	}
 }

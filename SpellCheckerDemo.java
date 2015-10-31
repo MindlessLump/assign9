@@ -11,10 +11,10 @@ import java.util.List;
 public class SpellCheckerDemo {
 
 	public static void main(String[] args) {
-		SpellChecker mySC = new SpellChecker(new File("dictionary.txt"));
+		SpellChecker mySC = new SpellChecker(new File("src/assign9/dictionary.txt"));
 
-		run_spell_check(mySC, "hello_world.txt");
-		run_spell_check(mySC, "good_luck.txt");
+		run_spell_check(mySC, "src/assign9/hello_world.txt");
+		run_spell_check(mySC, "src/assign9/good_luck.txt");
 	}
 
 	private static void run_spell_check(SpellChecker sc, String documentFilename) {
