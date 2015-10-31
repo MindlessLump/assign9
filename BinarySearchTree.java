@@ -167,45 +167,45 @@ public class BinarySearchTree<Type extends Comparable<? super Type>> implements 
 		BinaryNode<Type> oldParent = toBeRemoved.getParent();
 		boolean isLeftChild = toBeRemoved.getData().compareTo(oldParent.getData()) < 0;
 		
+		//CASE A
 		//If the node to be removed has no children, simply delete it, and adjust its parent's reference.
-		if(toBeRemoved.getLeftChild() == null && toBeRemoved.getRightChild() == null) {
+		if(toBeRemoved.isLeaf()) {
 			toBeRemoved.setParent(null);
+			size--;
 			if(isLeftChild) {
 				oldParent.setLeftChild(null);
-				size--;
 				return true;
 			}
 			oldParent.setRightChild(null);
-			size--;
 			return true;
 		}
 		
-		//If the node has only a right child, adjust its parent to reference its child directly
+		//CASE B
+		//If the node to be removed has only a right child, adjust its parent to reference its child directly
 		if(toBeRemoved.getLeftChild() == null && toBeRemoved.getRightChild() != null) {
 			toBeRemoved.setParent(null);
+			size--;
 			if(isLeftChild) {
 				oldParent.setLeftChild(toBeRemoved.getRightChild());
-				size--;
 				return true;
 			}
 			oldParent.setRightChild(toBeRemoved.getRightChild());
-			size--;
 			return true;
 		}
 		
-		//If the node has only a left child, adjust its parent to reference its child directly
+		//If the node to be removed has only a left child, adjust its parent to reference its child directly
 		if(toBeRemoved.getLeftChild() != null && toBeRemoved.getRightChild() == null) {
 			toBeRemoved.setParent(null);
+			size--;
 			if(isLeftChild) {
 				oldParent.setLeftChild(toBeRemoved.getLeftChild());
-				size--;
 				return true;
 			}
 			oldParent.setRightChild(toBeRemoved.getLeftChild());
-			size--;
 			return true;
 		}
 		
+		//CASE C
 		//If the node has two children, replace the node with its successor, and adjust pointers as necessary
 		if(toBeRemoved.getLeftChild() != null && toBeRemoved.getRightChild() != null) {
 			BinaryNode<Type> successor = toBeRemoved.successor();

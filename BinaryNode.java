@@ -212,4 +212,11 @@ public class BinaryNode<Type extends Comparable<? super Type>> {
 	public void setData(Type data) {
 		this.data = data;
 	}
+	
+	/**
+	 * @return true if this node has no children, false otherwise
+	 */
+	public boolean isLeaf() {
+		return getLeftChild() == null && getRightChild() == null;
+	}
 }
