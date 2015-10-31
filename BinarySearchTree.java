@@ -39,8 +39,12 @@ public class BinarySearchTree<Type extends Comparable<? super Type>> implements 
 			size++;
 			return true;
 		}
-		size++;
-		return root.add(item);
+		
+		if (root.add(item)) {
+			size++;
+			return true;
+		} 
+		return false;
 	}
 
 	@Override
@@ -161,7 +165,7 @@ public class BinarySearchTree<Type extends Comparable<? super Type>> implements 
 	public boolean remove(Type item) {
 		if(item == null)
 			throw new NullPointerException("Item is null.");
-		
+
 		//Get BinaryNode objects to represent the necessary nodes
 		BinaryNode<Type> toBeRemoved = get(item);
 		BinaryNode<Type> oldParent = toBeRemoved.getParent();
