@@ -2,6 +2,7 @@ package assign9;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.NoSuchElementException;
 
 /**
@@ -134,7 +135,7 @@ public class BinarySearchTree<Type extends Comparable<? super Type>> implements 
 	 * Returns true if this set contains no items.
 	 */
 	public boolean isEmpty() {
-		return root == null;
+		return size == 0;
 	}
 
 	@Override
@@ -295,7 +296,13 @@ public class BinarySearchTree<Type extends Comparable<? super Type>> implements 
 	 * order.
 	 */
 	public ArrayList<Type> toArrayList() {
-		return root.toArrayList(new ArrayList<Type>());
+		if (isEmpty()) {
+			return new ArrayList<Type>();
+		}
+		//Root could be null
+		ArrayList<Type> list = root.toArrayList(new ArrayList<Type>());
+		Collections.reverse(list);
+		return list;
 	}
 	
 	public BinaryNode<Type> get(Type item) {
