@@ -15,6 +15,18 @@ public class BinaryNode<Type extends Comparable<? super Type>> {
 	private BinaryNode<Type> parent;
 	private Type data;
 	
+	public static void main(String [] args) {
+		
+		BinarySearchTree<Integer> tree = new BinarySearchTree<Integer>();
+		tree.add(-1);
+		tree.add(-11);
+		tree.add(-111);
+		tree.add(-123);
+		tree.add(-10);
+		tree.buildDotFromTree("treeDot.dot");
+		System.out.println("done");
+	}
+	
 	/**
 	 * Constructor to initialize it to a state with children, data, and a parent.
 	 * @param data

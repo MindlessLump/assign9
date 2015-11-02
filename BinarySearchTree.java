@@ -1,5 +1,7 @@
 package assign9;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -305,9 +307,70 @@ public class BinarySearchTree<Type extends Comparable<? super Type>> implements 
 		return list;
 	}
 	
+	/**
+	 * @param item The data associated with the desired node
+	 * @return The BinaryNode associated with item, null if no node in the tree contains item.
+	 */
 	public BinaryNode<Type> get(Type item) {
 		if(item == null)
 			throw new NullPointerException("Item is null.");
 		return root.get(item);
 	}
+	
+	/**
+	 * Generates a dot file from this tree
+	 * 
+	 * @param filename Name of the file to be saved.
+	 */
+	public void buildDotFromTree(String filename) {
+		PrintWriter out = null;
+
+		try {
+			out = new PrintWriter(filename);
+		} catch (IOException e) {
+			System.out.println(e);
+		}
+
+		// Open the graph
+		out.println("digraph G {");
+		out.println("node [shape=circle, color=black]");
+
+		// Build graph from nodes
+		ArrayList<String> nodeList = new ArrayList<String>();
+		// Build a list of strings to be printed by the PrintWriter
+		recursiveDotBuilder(root, nodeList);
+
+		for (String node : nodeList) {
+			out.println(node);
+		}
+
+		// Close the graph
+		out.println("}");
+		out.close();
+	}
+
+	/**
+	 * Private recursive method to build a dot file from this tree
+	 * 
+	 * @param node node to be used
+	 * @param nodeList list of all nodes
+	 */
+	private void recursiveDotBuilder(BinaryNode<Type> node, ArrayList<String> nodeList) {
+		
+		if (node.getLeftChild() != null) {
+			
+			recursiveDotBuilder(node.getLeftChild(), nodeList);
+			nodeList.add("edge [dir=right color=\"black\"]");
+			nodeList.add("\t" + node.getData() + "->" + node.getLeftChild().getData());
+		}
+
+		if (node.getRightChild() != null) {
+			
+			recursiveDotBuilder(node.getRightChild(), nodeList);
+			nodeList.add("edge [dir=right color=\"black\"]");
+			nodeList.add("\t" + node.getData() + "->" + node.getRightChild().getData());
+		}
+
+	}
+	
 }

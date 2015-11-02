@@ -7,6 +7,12 @@ import java.util.NoSuchElementException;
 
 import org.junit.Test;
 
+/**
+ * JUnit test cases for BinarySearchTree.
+ * 
+ * @author Erik Martin and Nick Porter
+ */
+
 public class BinaryTreeTester {
 
 	private BinarySearchTree<Integer> tree;
