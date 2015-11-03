@@ -18,31 +18,31 @@ public class BinaryTreeTimer {
 	private static DecimalFormat formatter = new DecimalFormat("0000E0");	// Time string formatter
 	
 	public static void main(String[] args) {
-		/*System.out.println("Experiment 1:");
+		System.out.println("Experiment 1:");
 		System.out.println("--------------------BST first() with sorted order input--------------------");
 		System.out.println("N\tT(N)\t|\tT(N)/1\t\tT(N)/logN\t\tT(N)/N\t\tT(N)/NlogN\t\tT(N)/N^2");
-		doExperiment1Sorted();*/
+		doExperiment1Sorted();
 		System.out.println("--------------------BST first() with permuted order input--------------------");
 		System.out.println("N\tT(N)\t|\tT(N)/1\t\tT(N)/logN\t\tT(N)/N\t\tT(N)/NlogN\t\tT(N)/N^2");
 		doExperiment1Permuted();
 		
-		/*System.out.println("\nExperiment 2:");
+		System.out.println("\nExperiment 2:");
 		System.out.println("--------------------BST last() with sorted order input--------------------");
 		System.out.println("N\tT(N)\t|\tT(N)/1\t\tT(N)/logN\t\tT(N)/N\t\tT(N)/NlogN\t\tT(N)/N^2");
-		doExperiment2Sorted();*/
+		doExperiment2Sorted();
 		System.out.println("--------------------BST last() with permuted order input--------------------");
 		System.out.println("N\tT(N)\t|\tT(N)/1\t\tT(N)/logN\t\tT(N)/N\t\tT(N)/NlogN\t\tT(N)/N^2");
 		doExperiment2Permuted();
-
-		/*System.out.println("\nExperiment 3:");
+		
+		System.out.println("\nExperiment 3:");
 		System.out.println("--------------------BST add(mid) with sorted order input--------------------");
 		System.out.println("N\tT(N)\t|\tT(N)/1\t\tT(N)/logN\t\tT(N)/N\t\tT(N)/NlogN\t\tT(N)/N^2");
-		doExperiment3Sorted();*/
+		doExperiment3Sorted();
 		System.out.println("--------------------BST add(mid) with permuted order input--------------------");
 		System.out.println("N\tT(N)\t|\tT(N)/1\t\tT(N)/logN\t\tT(N)/N\t\tT(N)/NlogN\t\tT(N)/N^2");
 		doExperiment3Permuted();
 		
-		/*System.out.println("\nExperiment 4:");
+		System.out.println("\nExperiment 4:");
 		System.out.println("--------------------TreeSet first() with permuted order input--------------------");
 		System.out.println("N\tT(N)\t|\tT(N)/1\t\tT(N)/logN\t\tT(N)/N\t\tT(N)/NlogN\t\tT(N)/N^2");
 		doExperiment4();
@@ -55,7 +55,7 @@ public class BinaryTreeTimer {
 		System.out.println("\nExperiment 6:");
 		System.out.println("--------------------TreeSet add(mid) with permuted order input--------------------");
 		System.out.println("N\tT(N)\t|\tT(N)/1\t\tT(N)/logN\t\tT(N)/N\t\tT(N)/NlogN\t\tT(N)/N^2");
-		doExperiment6();*/
+		doExperiment6();
 	}
 	
 	public static void doExperiment1Sorted() {
@@ -79,19 +79,16 @@ public class BinaryTreeTimer {
 			
 			//Start first() timing
 			startTime = System.nanoTime();
+			midpointTime = startTime;
 			
 			for(int j = 0; j < timesToLoop; j++) {
+				long tempStart = System.nanoTime();
 				bst.first();
+				long tempEnd = System.nanoTime();
+				midpointTime += (tempEnd - tempStart);
 			}
 			
-			midpointTime = System.nanoTime();
-			
-			//Calculate the overhead
-			for(int j = 0; j < timesToLoop; j++) {
-				;
-			}
-			
-			stopTime = System.nanoTime();
+			stopTime = midpointTime;
 
 			double averageTime = ((midpointTime - startTime) - (stopTime - midpointTime)) / timesToLoop;
 
@@ -122,24 +119,19 @@ public class BinaryTreeTimer {
 			
 			//Start first() timing
 			startTime = System.nanoTime();
+			midpointTime = startTime;
 			
 			for(int j = 0; j < timesToLoop; j++) {
 				bst.clear();
 				Collections.shuffle(input);
 				bst.addAll(input);
+				long tempStart = System.nanoTime();
 				bst.first();
+				long tempEnd = System.nanoTime();
+				midpointTime += (tempEnd - tempStart);
 			}
 			
-			midpointTime = System.nanoTime();
-			
-			//Calculate the overhead
-			for(int j = 0; j < timesToLoop; j++) {
-				bst.clear();
-				Collections.shuffle(input);
-				bst.addAll(input);
-			}
-			
-			stopTime = System.nanoTime();
+			stopTime = midpointTime;
 
 			double averageTime = ((midpointTime - startTime) - (stopTime - midpointTime)) / timesToLoop;
 
@@ -173,19 +165,16 @@ public class BinaryTreeTimer {
 			
 			//Start first() timing
 			startTime = System.nanoTime();
+			midpointTime = startTime;
 			
 			for(int j = 0; j < timesToLoop; j++) {
+				long tempStart = System.nanoTime();
 				bst.last();
+				long tempEnd = System.nanoTime();
+				midpointTime += (tempEnd - tempStart);
 			}
 			
-			midpointTime = System.nanoTime();
-			
-			//Calculate the overhead
-			for(int j = 0; j < timesToLoop; j++) {
-				;
-			}
-			
-			stopTime = System.nanoTime();
+			stopTime = midpointTime;
 
 			double averageTime = ((midpointTime - startTime) - (stopTime - midpointTime)) / timesToLoop;
 
@@ -216,24 +205,19 @@ public class BinaryTreeTimer {
 			
 			//Start first() timing
 			startTime = System.nanoTime();
+			midpointTime = startTime;
 			
 			for(int j = 0; j < timesToLoop; j++) {
 				bst.clear();
 				Collections.shuffle(input);
 				bst.addAll(input);
+				long tempStart = System.nanoTime();
 				bst.last();
+				long tempEnd = System.nanoTime();
+				midpointTime += (tempEnd - tempStart);
 			}
 			
-			midpointTime = System.nanoTime();
-			
-			//Calculate the overhead
-			for(int j = 0; j < timesToLoop; j++) {
-				bst.clear();
-				Collections.shuffle(input);
-				bst.addAll(input);
-			}
-			
-			stopTime = System.nanoTime();
+			stopTime = midpointTime;
 
 			double averageTime = ((midpointTime - startTime) - (stopTime - midpointTime)) / timesToLoop;
 
@@ -267,19 +251,16 @@ public class BinaryTreeTimer {
 			
 			//Start first() timing
 			startTime = System.nanoTime();
+			midpointTime = startTime;
 			
 			for(int j = 0; j < timesToLoop; j++) {
+				long tempStart = System.nanoTime();
 				bst.add(n/2);
+				long tempEnd = System.nanoTime();
+				midpointTime += (tempEnd - tempStart);
 			}
 			
-			midpointTime = System.nanoTime();
-			
-			//Calculate the overhead
-			for(int j = 0; j < timesToLoop; j++) {
-				;
-			}
-			
-			stopTime = System.nanoTime();
+			stopTime = midpointTime;
 
 			double averageTime = ((midpointTime - startTime) - (stopTime - midpointTime)) / timesToLoop;
 
@@ -310,24 +291,19 @@ public class BinaryTreeTimer {
 			
 			//Start first() timing
 			startTime = System.nanoTime();
+			midpointTime = startTime;
 			
 			for(int j = 0; j < timesToLoop; j++) {
 				bst.clear();
 				Collections.shuffle(input);
 				bst.addAll(input);
+				long tempStart = System.nanoTime();
 				bst.add(n/2);
+				long tempEnd = System.nanoTime();
+				midpointTime += (tempEnd - tempStart);
 			}
 			
-			midpointTime = System.nanoTime();
-			
-			//Calculate the overhead
-			for(int j = 0; j < timesToLoop; j++) {
-				bst.clear();
-				Collections.shuffle(input);
-				bst.addAll(input);
-			}
-			
-			stopTime = System.nanoTime();
+			stopTime = midpointTime;
 
 			double averageTime = ((midpointTime - startTime) - (stopTime - midpointTime)) / timesToLoop;
 
@@ -358,24 +334,19 @@ public class BinaryTreeTimer {
 			
 			//Start first() timing
 			startTime = System.nanoTime();
+			midpointTime = startTime;
 			
 			for(int j = 0; j < timesToLoop; j++) {
 				ts.clear();
 				Collections.shuffle(input);
 				ts.addAll(input);
+				long tempStart = System.nanoTime();
 				ts.first();
+				long tempEnd = System.nanoTime();
+				midpointTime += (tempEnd - tempStart);
 			}
 			
-			midpointTime = System.nanoTime();
-			
-			//Calculate the overhead
-			for(int j = 0; j < timesToLoop; j++) {
-				ts.clear();
-				Collections.shuffle(input);
-				ts.addAll(input);
-			}
-			
-			stopTime = System.nanoTime();
+			stopTime = midpointTime;
 
 			double averageTime = ((midpointTime - startTime) - (stopTime - midpointTime)) / timesToLoop;
 
@@ -406,24 +377,19 @@ public class BinaryTreeTimer {
 			
 			//Start first() timing
 			startTime = System.nanoTime();
+			midpointTime = startTime;
 			
 			for(int j = 0; j < timesToLoop; j++) {
 				ts.clear();
 				Collections.shuffle(input);
 				ts.addAll(input);
+				long tempStart = System.nanoTime();
 				ts.last();
+				long tempEnd = System.nanoTime();
+				midpointTime += (tempEnd - tempStart);
 			}
 			
-			midpointTime = System.nanoTime();
-			
-			//Calculate the overhead
-			for(int j = 0; j < timesToLoop; j++) {
-				ts.clear();
-				Collections.shuffle(input);
-				ts.addAll(input);
-			}
-			
-			stopTime = System.nanoTime();
+			stopTime = midpointTime;
 
 			double averageTime = ((midpointTime - startTime) - (stopTime - midpointTime)) / timesToLoop;
 
@@ -454,24 +420,19 @@ public class BinaryTreeTimer {
 			
 			//Start first() timing
 			startTime = System.nanoTime();
+			midpointTime = startTime;
 			
 			for(int j = 0; j < timesToLoop; j++) {
 				ts.clear();
 				Collections.shuffle(input);
 				ts.addAll(input);
+				long tempStart = System.nanoTime();
 				ts.add(n/2);
+				long tempEnd = System.nanoTime();
+				midpointTime += (tempEnd - tempStart);
 			}
 			
-			midpointTime = System.nanoTime();
-			
-			//Calculate the overhead
-			for(int j = 0; j < timesToLoop; j++) {
-				ts.clear();
-				Collections.shuffle(input);
-				ts.addAll(input);
-			}
-			
-			stopTime = System.nanoTime();
+			stopTime = midpointTime;
 
 			double averageTime = ((midpointTime - startTime) - (stopTime - midpointTime)) / timesToLoop;
 
