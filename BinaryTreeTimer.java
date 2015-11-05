@@ -105,7 +105,7 @@ public class BinaryTreeTimer {
 		int n = 0;
 		
 		for(n = startSize; n <= endSize; n += stepSize) {
-			ArrayList<Integer> input = generateSortedOrder(n);
+			ArrayList<Integer> input = generatePermutedOrder(n);
 			BinarySearchTree<Integer> bst = new BinarySearchTree<>();
 			
 			System.out.print(n + "\t");
@@ -191,7 +191,7 @@ public class BinaryTreeTimer {
 		int n = 0;
 		
 		for(n = startSize; n <= endSize; n += stepSize) {
-			ArrayList<Integer> input = generateSortedOrder(n);
+			ArrayList<Integer> input = generatePermutedOrder(n);
 			BinarySearchTree<Integer> bst = new BinarySearchTree<>();
 			
 			System.out.print(n + "\t");
@@ -277,7 +277,7 @@ public class BinaryTreeTimer {
 		int n = 0;
 		
 		for(n = startSize; n <= endSize; n += stepSize) {
-			ArrayList<Integer> input = generateSortedOrder(n);
+			ArrayList<Integer> input = generatePermutedOrder(n);
 			BinarySearchTree<Integer> bst = new BinarySearchTree<>();
 			
 			System.out.print(n + "\t");
@@ -320,7 +320,7 @@ public class BinaryTreeTimer {
 		int n = 0;
 		
 		for(n = startSize; n <= endSize; n += stepSize) {
-			ArrayList<Integer> input = generateSortedOrder(n);
+			ArrayList<Integer> input = generatePermutedOrder(n);
 			TreeSet<Integer> ts = new TreeSet<>();
 			
 			System.out.print(n + "\t");
@@ -363,7 +363,7 @@ public class BinaryTreeTimer {
 		int n = 0;
 		
 		for(n = startSize; n <= endSize; n += stepSize) {
-			ArrayList<Integer> input = generateSortedOrder(n);
+			ArrayList<Integer> input = generatePermutedOrder(n);
 			TreeSet<Integer> ts = new TreeSet<>();
 			
 			System.out.print(n + "\t");
@@ -406,7 +406,7 @@ public class BinaryTreeTimer {
 		int n = 0;
 		
 		for(n = startSize; n <= endSize; n += stepSize) {
-			ArrayList<Integer> input = generateSortedOrder(n);
+			ArrayList<Integer> input = generatePermutedOrder(n);
 			TreeSet<Integer> ts = new TreeSet<>();
 			
 			System.out.print(n + "\t");
