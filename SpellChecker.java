@@ -3,6 +3,7 @@ package assign9;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
 
@@ -91,6 +92,7 @@ public class SpellChecker {
 	 *          - the List of Strings to be added to the dictionary
 	 */
 	private void buildDictionary(List<String> words) {
+		Collections.shuffle(words);
 		dictionary.addAll(words);
 	}
 
